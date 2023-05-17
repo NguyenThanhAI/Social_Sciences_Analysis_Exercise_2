@@ -1,0 +1,421 @@
+\documentclass[14pt, a4paper]{article}
+\usepackage{minitoc}
+\usepackage[left=3.00cm, right=2.5cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{vietnam}
+\usepackage[center]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr} % header, footer
+\usepackage{hyperref} % loại bỏ border với mục lục và công thức
+\usepackage[nonumberlist, nopostdot, nogroupskip]{glossaries}
+\usepackage{glossary-superragged}
+\usepackage{tikz,tkz-tab}
+\usepackage{pythonhighlight}
+\setglossarystyle{superraggedheaderborder}
+\pagestyle{fancy}
+%\usepackage[style=numeric,sortcites]{biblatex}
+%\addbibresource{ref.bib}
+%\usepackage[numbers]{natbib}
+\usepackage{indentfirst}
+\usepackage[natbib,backend=biber,style=ieee, sorting=ynt]{biblatex}
+\bibliography{ref.bib}
+
+\graphicspath{{./figures/}}
+
+\fancyhf{}
+%\rhead{\textbf{Môn học: Các phương pháp thống kê hiện đại trong nghiên cứu Xã hội học}}
+\lhead{\textbf{GVHD: TS. Trịnh Quốc Anh}}
+\rfoot{\thepage}
+\lfoot{\textbf{Học viên thực hiện: Nguyễn Chí Thanh - 21007925}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%
+%\numberwithin{equation}{section}
+%\numberwithin{algorithm}{section}
+%\numberwithin{figure}{section}
+%
+%\setlength{\parindent}{0.5cm}
+%
+%\setcounter{secnumdepth}{3} % Cho phép subsubsection trong report
+%\setcounter{tocdepth}{3} % Chèn subsubsection vào bảng mục lục
+
+%\newtheorem{dl}{Định lý}
+%\newtheorem{md}{Mệnh đề}
+%\newtheorem{bd}{Bổ đề}
+%\newtheorem{dn}{Định nghĩa}
+%\newtheorem{hq}{Hệ quả}
+
+%\newtheorem{baitap}{Bài tập}
+%\newtheorem*{loigiai}{Lời giải}
+
+%\numberwithin{dl}{section}
+%\numberwithin{md}{section}
+%\numberwithin{bd}{section}
+%\numberwithin{dn}{section}
+%\numberwithin{hq}{section}
+
+\setlength{\parindent}{0cm}
+
+\newtheorem{dl}{Định lý}
+\newtheoremstyle{sltheorem}
+{}                % Space above
+{}                % Space below
+{\normalfont}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{}                % Theorem head spec
+\theoremstyle{sltheorem}
+\newtheorem{baitap}{Bài tập}
+\newtheoremstyle{soltheorem}
+{}                % Space above
+{}                % Space below
+{\normalfont}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{\newline}               % Space after theorem head
+{}                % Theorem head spec
+\theoremstyle{soltheorem}
+\newtheorem*{loigiai}{Lời giải}
+
+\onehalfspacing
+
+
+\begin{document}
+\begin{titlepage}
+
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+    \center % Center everything on the page
+
+    %----------------------------------------------------------------------------------------
+    %	HEADING SECTIONS
+    %----------------------------------------------------------------------------------------
+    \textsc{\LARGE Đại học Quốc Gia Hà Nội}\\[0.5cm]
+    \textsc{\LARGE Trường đại học Khoa học tự nhiên}\\[0.5cm] % Name of your university/college
+    \textsc{\LARGE Khoa Toán - Cơ - Tin học}\\[0.5cm]
+
+    \includegraphics[scale=0.2]{HUS-logo.jpg}\\[0.5cm]
+
+    \textsc{\Large Chuyên ngành: Khoa học dữ liệu}\\[0.5cm] % Major heading such as course name
+
+
+    %----------------------------------------------------------------------------------------
+    %	TITLE SECTION
+    %----------------------------------------------------------------------------------------
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries Bài tập môn học}\\[0.4cm] % Title of your document
+    \HRule \\[1.5cm]
+
+    \textsc{\Large Môn học: Các phương pháp thống kê hiện đại \\ trong nghiên cứu Xã hội học}\\[1cm] % Minor heading such as course title
+
+
+    \textsc{\Large Bài tập số 2}\\[1cm]
+
+
+    %----------------------------------------------------------------------------------------
+    %	AUTHOR SECTION
+    %----------------------------------------------------------------------------------------
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+        \emph{Giảng viên hướng dẫn:} \\
+        TS. Trịnh Quốc Anh % Supervisor's Name
+        \end{flushleft}
+    \end{minipage}\\[0.5cm]
+
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+    \emph{Học viên thực hiện:}\\
+    Nguyễn Chí Thanh \\
+    MSHV: 21007925 \\ % Your name
+    Lớp: Khoa học dữ liệu - K4
+    \end{flushleft}
+    \end{minipage}
+
+
+    % If you don't want a supervisor, uncomment the two lines below and remove the section above
+    %\Large \emph{Author:}\\
+    %John \textsc{Smith}\\[3cm] % Your name
+
+    %----------------------------------------------------------------------------------------
+    %	DATE SECTION
+    %----------------------------------------------------------------------------------------
+
+    % I don't want day because it is English
+    % {\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+    %----------------------------------------------------------------------------------------
+    %	LOGO SECTION
+    %----------------------------------------------------------------------------------------
+
+    %\includegraphics{logo/rsz_3logo-khtn.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+    %----------------------------------------------------------------------------------------
+
+    \vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\nocite{*}
+
+\newpage
+
+\begin{baitap}
+    Dữ liệu thực hành là dữ liệu "Sonar" có trong gói lệnh "mlbench" của R (hoàn toàn có thể export dữ liệu này để dùng với Python).
+    \begin{enumerate}
+        \item Dữ liệu Sonar là dữ liệu gì và hãy mô tả thống kê các thông tin thu thập được.
+        \item Hồi quy logistic có thể áp dụng cho dữ liệu Sonar để làm nhiệm vụ gì? Tại sao?
+        \item Phát biểu mô hình logistic, điều kiện của mô hình, và giải thích các ước lượng tìm được.
+        \item Hãy dùng chỉ tiêu ROC để đánh giá về mô hình logistic tìm được ở câu 3. Đại lượng ROC đo thông tin gì của mô hình? Giải thích.
+        \item Hãy đưa ra mô hình logistic phù hợp nhất từ dữ liệu "Sonar". Vì sao?
+    \end{enumerate}
+\end{baitap}
+
+\begin{loigiai}
+    Dữ liệu Sonar là dữ liệu gì và hãy mô tả thống kê các thông tin thu thập được.
+    \begin{itemize}
+        \item Dữ liệu Sonar là dữ liệu gì
+        Tập dữ liệu Sonar là tập dữ liệu được Gorman và Sejnowski sử dụng trong công trình nghiên cứu phân loại tín hiệu sonar sử dụng mạng neuron \cite{gorman1988analysis}.
+        Nhiệm vụ của bài toán là huấn luyện một mạng neuron để phân biệt tín hiệu sonar thu được từ một hình trụ kim loại hay một hình trụ đá thô.
+        
+        Mỗi phần tử trong tập dữ liệu gồm tập 60 số trong khoảng từ 0.0 đến 1.0.
+        Từng số biểu diễn năng lượng trong một dải tần số nhất định được tính trong một khoảng thời gian nhất định. 
+        Từng nhãn liên kết với từng phần tử bao gồm chữ cái "R" nếu tín hiệu thu được hình trụ đá thô và "M" nếu tín hiệu thu được từ hình trụ kim loại.
+        Các số trong nhãn theo thứ tự tăng dần góc thu được tín hiệu nhưng thông tin về góc không được đưa trực tiếp vào trong tập dữ liệu.
+        \item Mô tả thống kê các thông tin thu tập được:
+        
+        Ta kiểm tra tính chuẩn của dữ liệu, ta giả thiết $H_0$ là dữ liệu theo phân phối chuẩn và đối thiết $H_1$ dữ liệu không theo phân phối chuẩn.
+
+        Ta chọn các số $\alpha$:
+
+        \begin{equation*}
+            0 < \alpha_1 < \alpha_2 < \dots < \alpha_m < 1, m = 20
+        \end{equation*}
+
+        Các số $\alpha_i, i = 1,\dots,m$ là số cách đều nhau và $\alpha_1=0.01, \alpha_{20}=0.99$
+
+        Ta tìm các số $c^2$:
+
+        \begin{equation*}
+            \infty > c_1^2 > c_2^2 > \dots > c_m^2 > 0
+        \end{equation*}
+
+        với $c_i^2 = \chi_{60}^2 (\alpha_i)$
+
+        Theo lý thuyết ta có:
+        \begin{equation*}
+            \begin{aligned}
+                &p(\bold{x}_i \in V(c^2)) = 1 - \alpha_c \\
+                &V(c^2) = \lbrace \bold{x} \vert (\bold{x} - \bold{\mu})^T \bold{\Sigma}^{-1} (\bold{x} - \bold{\mu}) \leq c^2 \rbrace
+            \end{aligned}
+        \end{equation*}
+
+        \begin{equation*}
+            \begin{aligned}
+                p(\bold{x} \in \Omega \backslash V(c_1^2)) &= \alpha_1 \\
+                p(\bold{x} \in V(c_1^2) \backslash V(c_2^2)) &= \alpha_2 - \alpha_1 \\
+                &\dots \\
+                p(\bold{x} \in V(c_{m-1}^2) \backslash V(c_m^2)) &= \alpha_m - \alpha_{m-1} \\
+                p(\bold{x} \in V(c_m^2)) &= 1 - \alpha_m
+            \end{aligned}
+        \end{equation*}
+
+        Từ dữ liệu thực tế:
+        \begin{equation*}
+            \begin{aligned}
+                n_1 &= \lvert \lbrace \bold{x}_i \vert \bold{x}_i \in \Omega \backslash V(c_1^2) \rbrace \rvert \\
+                n_2 &= \lvert \lbrace \bold{x}_i \vert \bold{x}_i \in V(c_1^2) \backslash V(c_2^2) \rbrace \rvert \\
+                &\dots \\
+                n_{m+1} &= \lvert \lbrace \bold{x}_i \vert \bold{x}_i \in  V(c_m^2) \rbrace \rvert \\
+            \end{aligned}
+        \end{equation*}
+
+        với:
+
+        \begin{equation*}
+            \begin{aligned}
+                n_1 &= \lvert \lbrace \bold{x}_i \vert \bold{x}_i \in \Omega \backslash V(c_1^2) \rbrace \rvert \\
+                &=\lvert \lbrace \bold{x}_i \vert (\bold{x}_1 - \bold{\mu})^T \bold{S}^{-1} (\bold{x}_1 - \bold{\mu}) > c^2  \rbrace \rvert
+            \end{aligned}
+        \end{equation*}
+    \end{itemize}
+
+    Ta tính các quan sát:
+
+    \begin{equation*}
+        O_i = \dfrac{n_i}{n}, i=1, \dots, m+1
+    \end{equation*}
+
+    Ta tính test thống kê:
+
+    \begin{equation*}
+        T = \sum_{i=1}^{m+1} \dfrac{(O_i - E_i)^2}{E_i}
+    \end{equation*}
+
+    Ta bác bỏ $H_0$ nếu $T > \chi_m^2(\alpha)$
+
+    Ta sử dụng code:
+
+    \begin{python}
+y = df["Class"]
+x = df.drop("Class", axis=1).to_numpy()
+    \end{python}
+    
+\end{loigiai}
+
+\begin{baitap}
+    Hồi quy logistic có thể áp dụng cho dữ liệu Sonar để làm nhiệm vụ gì? Tại sao?
+\end{baitap}
+
+\begin{loigiai}
+    Hồi quy logistic có thể áp dụng cho dữ liệu Sonar để làm nhiệm vụ gì? Tại sao?
+        
+    Do biến phụ thuộc của tập dữ liệu trên chỉ có hai khả năng là "M" hoặc "R".
+    Nhưng ở phần mô tả thống kê, các đặc trưng không thể phân tách tuyến tính với theo từng lớp, vì vậy ta cần một bộ dự đoán kết hợp các đặc trưng (có thể chỉ cần một tập con các đặc trưng trong tập dữ liệu) và đầu ra là xác suất dự đoán rơi vào khả năng nào.
+    Hay bộ dự đoán có dạng:
+
+    \begin{equation*}
+        p(y \vert \bold{x}) = f(\bold{x}) = \sigma(w_0 + w_1 x_1 + w_2 x_2 + \dots w_n x_n) = \sigma(\bold{w}^T \bold{x})
+    \end{equation*}
+
+    với:
+        
+    \begin{equation*}
+        \begin{aligned}
+            p(y \vert \bold{x}) = \sigma(\bold{w}^T \bold{x}) &= \dfrac{1}{1 + \exp(-\bold{w}^T \bold{x})} \\
+            \bold{w} &= \begin{bmatrix}
+                w_0 & w_1 & w_2 & \dots & w_n
+            \end{bmatrix}^T \\
+            \bold{x} &= \begin{bmatrix}
+                1 & x_1 & x_2 & \dots & x_n
+            \end{bmatrix}^T
+        \end{aligned}
+    \end{equation*}
+
+    và $n (n \leq 60)$ là số đặc trưng được chọn đưa vào mô hình, $\bold{x}$ có thể là một tập con các đặc trưng từ bộ dữ liệu gốc hoặc là các đặc trưng là kết quả của kỹ trích xuất đặc trưng.
+
+    Mô hình trên chính là mô hình hồi quy Logistic. 
+    Mô hình hồi quy Logistic có thể dùng để dự đoán loại vật liệu của hình trụ phát ra tín hiệu Sonar là "M" hay "R" dựa vào đặc trưng được trích chọn hoặc trích xuất từ các đặc trưng gốc là năng lượng của các dải tần số nhất định.
+    Ngoài ra ta có thể sử dụng mạng neuron nhiều lớp ẩn để dự đoán loại vật liệu của hình trụ phát ra tín hiệu Sonar.
+\end{loigiai}
+
+\begin{baitap}
+    Phát biểu mô hình logistic, điều kiện của mô hình, và giải thích các ước lượng tìm được.
+\end{baitap}
+
+\begin{loigiai}
+    \begin{itemize}
+        \item Phát biểu mô hình logistic:
+        Mô hình logistic, còn được gọi là hồi quy logistic, là một mô hình thống kê được sử dụng để dự đoán và phân loại các biến phụ thuộc nhị phân, tức là các biến có giá trị chỉ là 0 hoặc 1. 
+        Mô hình này sử dụng hàm logistic để ước lượng xác suất xảy ra của biến phụ thuộc dựa trên giá trị của các biến độc lập.
+        Vì kết quả là một xác suất nên kết quả đầu ra của mô hình là một số nằm trong khoảng từ 0 đến 1.
+        Trong hồi quy logistic, phép biến đổi logit thường được áp dụng trên tỷ lệ giữa khả năng xảy ra trên khả năng không xảy ra được biểu diễn bằng công thức sau:
+
+        \begin{equation*}
+            \log \dfrac{p}{1-p} = w_0 +  w_1 x_1 + w_2 x_2 + \dots w_n x_n = \bold{w}^T \bold{x}
+        \end{equation*}
+
+        Trong công thức trên $p$ là biến phụ thuộc hay biến kết quả và $x$ là các biến độc lập.
+        Các trọng số $\bold{w}$ là các tham số được ước lượng bằng ước hợp hợp lý cực đại MLE (Maximum Likelihood Estimation).
+        Phương pháp này sử dụng một vòng lặp để cực đại hóa hàm MLE bằng cách điều chỉnh các trọng số $\bold{x}$.
+        Sau khi ta tìm được các trọng số tối ưu $\bold{w}^*$, xác suất có điều kiện cho từng quan sát có thể được tính toán.
+        Ta có thể chọn ngưỡng, ví dụ với ngưỡng 0.5, nếu đầu ra của mô hình nhỏ hơn 0.5, ta sẽ dự đoán 0 trong khi đầu ra lớn hơn hoặc bằng 0.5, ta sẽ dự đoán là 1.
+
+        \item Các điều kiện của mô hình logistic:
+        
+        \begin{itemize}
+            \item Mô hình logistic yêu cầu biến phụ thuộc có dạng nhị phân hoặc biến phụ thuộc là dạng định danh.
+            \item Mô hình logistic yêu cầu các quan sát phải độc lập với nhau. Nghĩa là mỗi ví dụ học không phụ thuộc vào bất kỳ ví dụ học nào khác trong tập dữ liệu.
+            Nhưng giả định này thường hay bị vi phạm do có nhiều điểm dữ liệu được đo trong một khoảng thời gian, không gian gần nhau dẫn đến các quan sát có sự liên quan nhất định với nhau.
+            \item Mô hình logistic đòi hỏi phải có ít hoặc không có đa cộng tuyến giữa các biến độc lập.
+            Điều này có nghĩa là các biến độc lập không nên có tương quan quá cao với nhau.
+            \item Không có các điểm ngoại lai: hồi quy logistic rất nhạy cảm với các giá trị ngoại lai hoặc các điểm dữ liệu có giá trị lớn hoặc nhỏ bất thường.
+            \item Mô hình logistic giả định mối quan hệ của hàm log cơ số tự nhiên của tỷ số xác suất xảy ra - không xảy ra phụ thuộc tuyến tính vào các biến độc lập.
+            \item Mô hình logistic cần một số lượng các ví dụ học đủ lớn. Số ví dụ học cần ít nhất là khoảng 10 lần số biến độc lập được đưa vào mô hình.
+        \end{itemize}
+
+        \item Giải thích các ướng lượng tìm được:
+        Đối với mô hình hồi quy logistic có dạng:
+        \begin{equation*}
+            p(y \vert \bold{x}) = f(\bold{x}) = \sigma(w_0 + w_1 x_1 + w_2 x_2 + \dots w_n x_n) = \sigma(\bold{w}^T \bold{x})
+        \end{equation*}
+
+        việc tính $\exp(w_i)$ sử dụng để chuyển đổi thành tỷ lệ giữa khả năng xảy ra 1 - không xảy ra 1.
+        Nếu tỷ lệ này lớn hơn 1, thì sự kiện 1 có khả năng xảy ra cao hơn.
+        Nếu tỷ lệ này nhỏ hơn 1, thì sự kiện 0 có khả năng xảy ra cao hơn.
+        Dựa trên phương trình trên, tỷ lệ thay đổi theo $\exp(w_i)$ lần khi $x_i$ tăng lên 1 đơn vị.
+
+    \end{itemize}
+
+    \begin{baitap}
+        Hãy dùng chỉ tiêu ROC để đánh giá về mô hình logistic tìm được ở câu 3. Đại lượng ROC đo thông tin gì của mô hình? Giải thích
+    \end{baitap}
+
+    \begin{loigiai}
+        \begin{itemize}
+            \item Đại lượng ROC đo thông tin gì của mô hình?
+            
+            ROC (Receiver operating characteristic) là một đồ thị được sử dụng khá phổ biến trong validation các model phân loại nhị phân. Đường cong này được tạo ra bằng cách biểu diễn tỷ lệ dự báo true positive rate (TPR) dựa trên tỷ lệ dự báo failse positive rate (FPR) tại các ngưỡng Threshold khác nhau. 
+            Trong học máy ta gọi true positive rate là độ nhạy sensitivity tức là xác xuất dự báo đúng một sự kiện là positive. Tỷ lệ false positive rate là probability of false alarm (tỷ lệ cảnh báo sai, một sự kiện là negative nhưng coi nó là positive) và tỷ lệ này tương ứng với xác xuất mắc sai lầm loại II. Như vậy ROC curve sẽ thể hiện mối quan hệ, sự đánh đổi và ý nghĩa lựa chọn một model phù hợp của độ nhạy và tỷ lệ cảnh báo sai.
+
+            Xác xuất mắc sai lầm loại I và loại II trong dự báo được nhắc đến khá nhiều trong các tài liệu thống kê học và đây là những loại sai lầm đặc trưng cơ bản trong các model dự báo. Giả sử chúng ta xét một model dự báo sự kiện với 2 khả năng positive (tích cực) và negative (tiêu cực). Các kết quả của model xảy ra sẽ rơi vào 4 nhóm sau:
+
+            \begin{itemize}
+                \item TP: True positive, dự báo đúng sự kiện là positive trong trường hợp thực tế là positive.
+                \item FP: False positive, dự báo sai sự kiện là positive trong trường hợp thực tế là negative.
+                \item TN: True negative, dự báo đúng sự kiện là negative trong trường hợp thực tế là negative.
+                \item FN: False negative, dự báo sai sự kiện là negative trong trường hợp thực tế là positive.
+            \end{itemize}
+
+            Các chỉ số dùng trong ROC Curve:
+
+            \begin{itemize}
+                \item TPR(True Positive Rate/Sentivity/Recall) Biểu diễn tỷ lệ phân loại chính xác các mẫu dương tính trên tất cả các mẫu dương tính, được tính theo công thức:
+                \begin{equation*}
+                    TPR = \dfrac{TP}{TP + FN}
+                \end{equation*}
+                TPR càng cao thì các mẫu dương tính càng được phân loại chính xác.
+                \item Specificity: Biểu diễn tỷ lệ phân loại chính xác các mẫu âm tính trên tất cả các mâu âm tính, được tính theo công thức:
+                \begin{equation*}
+                    Specificity = \dfrac{TN}{TN + FP}
+                \end{equation*}
+                \item FPR(False Positive Rate/Fall-out): Biểu diễn tỷ lệ gắn nhãn sai các mẫu âm tính thành dương tính trên tất cả các mẫu âm tính, được tính theo công thức:
+                \begin{equation*}
+                    FPR = 1 - Specificity = \dfrac{FP}{TN + FP}
+                \end{equation*}
+            \end{itemize}
+            Có thể thấy Specificity nghịch biến với FPR. FPR càng cao thì Specificity càng giảm và số lượng các mẫu âm tính bị gắn nhãn sai càng lớn.
+            Thông thường các khía cạnh dự báo của một model mà chúng ta quan tâm sẽ tập trung vào 2 tỷ lệ: TPR/Sensitivity và FPR. 
+            Vì vậy cần một đồ thị biểu diễn mối liên hệ giữa chúng. 
+            ROC Curve là một đường cong đặc thù thể hiện các tỷ lệ này theo những ngưỡng xác suất.
+
+            Dựa trênmô hình logistic, sau khi huấn luyện chúng ta sẽ thu được các điểm số của biến được dự báo. 
+            Nếu thiết lập một điểm ngưỡng cho mô hình ta sẽ có một ngưỡng để đánh giá mô hình dự báo ra kết quả positive hay negative. 
+            Đường cong ROC sẽ biểu diễn với mỗi điểm ngưỡng ứng với nó sẽ có tỷ lệ TPR/Sensitivity và FPR là bao nhiêu. 
+            Trong đó trục tung ứng với tỷ lệ TPR/Sensitivity và trục hoành ứng với tỷ lệ FPR.
+
+            Đường cong ROC là một dạng đường cong lồi hướng về phía góc trên cùng bên trái. 
+            Ứng với mỗi giá trị xác suất ngưỡng cao hơn thì TPR/Sensitivity cao hơn và FPR cao hơn. Điều này có thể lý giải như sau:
+
+            Khi các điểm xác suất tăng dần thì tỷ lệ TPR/Sensitivity giảm dần do ở mức điểm cao hơn thì số lượng được dự báo là positive có thể giảm trong khi số lượng positive thực tế không đổi vậy nên TPR/Sensitivity có thể giảm. 
+            Đồng thời tỷ lệ FPR cũng giảm do mức điểm cao hơn thì số lượng dự báo là positive giảm nên số lượng được dự báo sai FP (Failse Positive) có thể giảm vì vậy FPR giảm.
+            Do đó đường cong ROC có xu hướng đồng biến giữa TPR/Sensitivity và FPR.
+        \end{itemize}
+    \end{loigiai}
+\end{loigiai}
+
+
+\end{document}
