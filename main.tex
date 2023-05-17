@@ -247,8 +247,8 @@
 
         \begin{equation*}
             \begin{aligned}
-                n_1 &= \lvert \lbrace \bold{x}_i \vert \bold{x}_i \in \Omega \backslash V(c_1^2) \rbrace \rvert \\
-                &=\lvert \lbrace \bold{x}_i \vert (\bold{x}_1 - \bold{\mu})^T \bold{S}^{-1} (\bold{x}_1 - \bold{\mu}) > c^2  \rbrace \rvert
+                n_1 &= \lvert \lbrace \bold{x}_1 \vert \bold{x}_1 \in \Omega \backslash V(c_1^2) \rbrace \rvert \\
+                &=\lvert \lbrace \bold{x}_1 \vert (\bold{x}_1 - \bold{\mu})^T \bold{S}^{-1} (\bold{x}_1 - \bold{\mu}) > c^2  \rbrace \rvert
             \end{aligned}
         \end{equation*}
     \end{itemize}
@@ -270,10 +270,90 @@
     Ta sử dụng code:
 
     \begin{python}
+import pandas as pd
+import numpy as np
+from scipy.stats import chi2
+import seaborn as sns
+
 y = df["Class"]
 x = df.drop("Class", axis=1).to_numpy()
+mean_x = np.mean(x, axis=0)
+S = np.matmul((x - mean_x[np.newaxis, :]).T, x - mean_x[np.newaxis, :]) / (x.shape[0] - 1)
+inverted_S = np.linalg.inv(S)
+alphas = np.linspace(0.01, 0.99, num=20)
+c_sqr = chi2.ppf(1-alphas, x.shape[1])
+alphas = np.insert(alphas, 0, 0)
+alphas = np.append(alphas, 1)
+alpha_diff = np.diff(alphas)
+stat_test = ((x - mean_x[np.newaxis, :]).dot(inverted_S) * (x - mean_x[np.newaxis, :])).sum(axis=1)
+observed = np.zeros(alpha_diff.shape[0], dtype=np.uint8)
+for el in stat_test:
+    for i in range(alpha_diff.shape[0]):
+        if i == 0:
+            if el >= c_sqr[i]:
+                observed[i] += 1
+                #print(i, el, c_sqr[i])
+                break
+        elif i > 0 and i < (alpha_diff.shape[0] - 1):
+            if el >= c_sqr[i] and el < c_sqr[i-1]:
+                observed[i] += 1
+                #print(i, el, c_sqr[i-1], c_sqr[i])
+                break
+        else:
+            if el < c_sqr[i-1]:
+                observed[i] += 1
+                break
+            
+                
+observed = observed/np.sum(observed)
+observed, np.sum(observed)
+chi_test = np.sum((alpha_diff - observed)**2/alpha_diff)
+chi_test, chi2.ppf(0.95, alphas.shape[0])
     \end{python}
     
+    Ta tính được $T=11.03288$ và $\chi_20^2(0.05)=33.9244$, vậy $T < \chi_20^2(0.05)$, ta chưa có cơ sở bác bỏ $H_0$ vậy dữ liệu là phân phối chuẩn nhiều chiều.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.2]{box_plot.png}
+        \caption{Boxplot của các biến theo từng loại vật liệu của hình trụ}
+        \label{fig:box_plot}
+    \end{figure}
+
+    Hình \ref{fig:box_plot} biểu diễn boxplot của từng biến theo từng loại vật liệu của hình trụ.
+    Ta nhận thấy trong từng biến, phân phối của hai nhãn không có quá nhiều sự khác biệt.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.2]{correl_heatmap.png}
+        \caption{Độ tương quan của đôi một các biến}
+        \label{fig:correl_heatmap}
+    \end{figure}
+
+    Hình \ref{fig:correl_heatmap} biểu diễn độ tương quan của đôi một từng cặp biến.
+    Các biến ở cạnh nhau có độ tương quan khá lớn, lý do các dải tần số gần nhau cũng sẽ có năng lượng tương đối giống nhau.
+    Những dải tần số cách nhau khoảng 10 dải thường có độ tương quan âm.
+    Những dài tần số cách nhau hơn 10 dải thường có độ tương quan tương đối thấp.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.2]{histogram.png}
+        \caption{Histogram của từng biến}
+        \label{fig:histogram}
+    \end{figure}
+
+    Hình \ref{fig:histogram} biểu diễn histogram của từng biến.
+    
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.2]{figures/histogram_against_label.png}
+        \caption{Histogram của từng biến có phân biệt nhãn}
+        \label{fig:histogram_against_label}
+    \end{figure}
+
+    Hình \ref{fig:histogram_against_label} biểu diễn histogram của từng biến theo từng loại vật liệu của hình trụ.
+    Đa phần histogram của từng biến theo từng loại vật liệu không khác nhau quá nhiều trừ các biến: V11, V12, V13, V20, V21, V48, V49, V51, V52.
+
 \end{loigiai}
 
 \begin{baitap}
@@ -416,6 +496,10 @@ x = df.drop("Class", axis=1).to_numpy()
         \end{itemize}
     \end{loigiai}
 \end{loigiai}
+
+\newpage
+\printbibliography[title={TÀI LIỆU THAM KHẢO}]
+
 
 
 \end{document}
