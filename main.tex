@@ -614,18 +614,21 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
 
     \begin{figure}[h!]
         \centering
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\textwidth]{figures/mf_quantile_resid.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/mf_quantile_resid.png}
             \caption{Quantile residual của mô hình forward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\linewidth}
-            \includegraphics[width=0.3\linewidth]{figures/mb_quantile_resid.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/mb_quantile_resid.png}
             \caption{Quantile residual của mô hình backward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\linewidth]{figures/mbo_quantile_resid.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/mbo_quantile_resid.png}
             \caption{Quantile residual của mô hình forward-backward}
         \end{subfigure}
         \caption{Quantile residual của các mô hình}
@@ -636,18 +639,21 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
 
     \begin{figure}[h!]
         \centering
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\textwidth]{figures/mf_fitted.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=1.0\textwidth]{figures/mf_fitted.png}
             \caption{Quantile residual của mô hình forward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\linewidth}
-            \includegraphics[width=0.3\linewidth]{figures/mb_fitted.png}
+        \begin{subfigure}[b]{0.4\linewidth}
+            \centering
+            \includegraphics[width=1.0\linewidth]{figures/mb_fitted.png}
             \caption{Quantile residual của mô hình backward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\linewidth]{figures/mbo_fitted.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=1.0\linewidth]{figures/mbo_fitted.png}
             \caption{Quantile residual của mô hình forward-backward}
         \end{subfigure}
         \caption{Quantile residual vẽ theo các giá trị $\eta$ (hàm log-odd) của các mô hình}
@@ -659,21 +665,24 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
 
     \begin{figure}[h!]
         \centering
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\textwidth]{figures/mf_cooks.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=1.0\textwidth]{figures/mf_cooks.png}
             \caption{Cooks distance của mô hình forward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\linewidth}
-            \includegraphics[width=0.3\linewidth]{figures/mb_cooks.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=1.0\linewidth]{figures/mb_cooks.png}
             \caption{Cooks distance của mô hình backward}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{\textwidth}
-            \includegraphics[width=0.3\linewidth]{figures/mbo_cooks.png}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=1.0\linewidth]{figures/mbo_cooks.png}
             \caption{Cooks distance của mô hình forward-backward}
         \end{subfigure}
-        \caption{Quantile residual vẽ theo các giá trị $\eta$ (hàm log-odd) của các mô hình}
+        \caption{Cooks distance của các mô hình}
         \label{fig:Cooks}
     \end{figure}
     
@@ -1143,12 +1152,14 @@ weighted avg       0.88      0.88      0.88        84
         \begin{figure}[h!]
             \centering
             \begin{subfigure}[b]{\textwidth}
-                \includegraphics[scale=0.9]{figures/ROC_Curve_AIC_BIC_1.png}
+                \centering
+                \includegraphics[scale=0.8]{figures/ROC_Curve_AIC_BIC_1.png}
                 \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 1}
             \end{subfigure}
             \vfill
             \begin{subfigure}[b]{\linewidth}
-                \includegraphics[scale=0.9]{figures/ROC_Curve_AIC_BIC_2.png}
+                \centering
+                \includegraphics[scale=0.8]{figures/ROC_Curve_AIC_BIC_2.png}
                 \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 2}
             \end{subfigure}
             \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình}
