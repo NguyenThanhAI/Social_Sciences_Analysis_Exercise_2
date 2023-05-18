@@ -312,6 +312,13 @@ chi_test, chi2.ppf(0.95, alphas.shape[0])
 
     \begin{figure}[h!]
         \centering
+        \includegraphics[width=0.9\textwidth]{figures/raw_summary.png}
+        \caption{Thông tin thống kê của tập dữ liệu}
+        \label{fig:raw_summary}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \centering
         \includegraphics[scale=0.2]{box_plot.png}
         \caption{Boxplot của các biến theo từng loại vật liệu của hình trụ}
         \label{fig:box_plot}
@@ -693,7 +700,7 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
     \end{itemize}
 
     Tập dữ liệu được chia thành hai phần train và test với tỷ lệ 60 \% - 40 \%.
-    Các mô hình được tối ưu hóa tham số theo cách 1 - tìm random\_state tối ưu của mô hình logistic.
+    
     Các ký pháp của các mô hình là:
 
     \begin{itemize}
@@ -750,7 +757,333 @@ def compute_aic(y_true: np.ndarray, y_pred_prob: np.ndarray, p: int, sample_size
         return -2 * sum(log_likelihood_elements) + 2 * p
     \end{python}
 
+    Các mô hình được tối ưu hóa tham số theo cách 1 - tìm random\_state tối ưu của mô hình logistic, ta có kết quả các tham số được học $\bold{w}$ và các chỉ số Precision, Recall, F1 score:
+
+    \begin{itemize}
+        \item Mô hình full\_val:
+        Các tham số được học:
+        \begin{verbatim}
+ [3.22932915], [-0.87174914 -0.30963334 -0.11752805 -0.62675144 -0.58901869  0.28718687
+ 0.49972174  0.10168371 -0.89450285 -0.50952556 -0.69337561 -0.871028
+-0.43455294  0.01121181  0.38308565  0.60565929  0.40510435  0.19109057
+-0.05722815 -0.52582315 -0.48696665 -0.34407524 -0.61238686 -0.68441223
+-0.11009024  0.19462538  0.26657318 -0.21585409 -0.45986945 -0.29339578
+ 0.73359603 -0.49003703 -0.10645622  0.32340637  0.20716513  0.53165005
+ 0.77901717 -0.3636166  -0.45075674  0.60957025  0.47762635 -0.0987868
+-0.4477161  -0.4647976  -0.8958777  -0.68422059 -0.34920678 -0.74660303
+-0.68505938  0.31678214 -0.46170548 -0.66230842 -0.56030134 -0.63991786
+ 0.064381    0.11597954  0.34673267 -0.32035301 -0.42174732 -0.2151012 ]
+        \end{verbatim}
+        Các chỉ số Precision, Recall, F1 score:
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+           0       0.91      0.87      0.89        45
+           1       0.85      0.90      0.88        39
+
+    accuracy                           0.88        84
+   macro avg       0.88      0.88      0.88        84
+weighted avg       0.88      0.88      0.88        84
+        \end{verbatim}
+
+        Nhãn 0 tương ứng với nhãn "M" và nhãn 1 tương ứng với nhãn "R"
+
+        \item Mô hình full\_cross\_val:
+        Các tham số được học:
+
+        \begin{verbatim}
+[3.37919263], [-0.95007614 -0.45233876 -0.14899378 -0.39244151 -0.73782666 -0.15212348
+-0.19758737  0.2259306  -0.77063387 -0.74494207 -1.23356998 -1.33280311
+-1.0644896  -0.20718998  0.3665993   0.64948446  0.4231459   0.17888023
+-0.09089788 -0.52193355 -0.34594437 -0.54358704 -0.44112321 -0.21761547
+ 0.066931    0.06687894 -0.37101186 -0.50763454 -0.57674598 -0.29096594
+ 0.80220097  0.26111162 -0.2508883   0.31771472  0.80582704  0.86016677
+ 0.5563654  -0.13853005 -0.26060007  0.37960659  0.38099722  0.06074218
+-0.22595186 -0.61772477 -0.8665132  -0.738499   -0.60359758 -0.76957677
+-0.67724562  0.19526412 -0.44782554 -0.36422357  0.07601136 -0.17657912
+ 0.49997559 -0.08819789  0.58985228 -0.04162175 -0.48099575 -0.54796971]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.76      0.78      0.77        45
+            1       0.74      0.72      0.73        39
+ 
+     accuracy                           0.75        84
+    macro avg       0.75      0.75      0.75        84
+ weighted avg       0.75      0.75      0.75        84
+        \end{verbatim}
+
+        \item Mô hình pca\_95\_val:
+        Các tham số được học:
+
+        \begin{verbatim}
+[2.41565562], [-0.35626428  0.39899927 -2.23554251 -0.27487296  0.06345631 -0.86247473
+1.07968595  0.15091819  0.39474461  0.28149987 -0.07048068 -0.6324199
+1.26904865 -0.41104855 -0.68888055 -0.26336546 -0.45228238 -0.00730354
+0.44985307 -0.2571096  -1.06971579  0.51284122 -0.01330604  0.00810751
+0.44261259  0.54570473  0.39019026  0.02137159]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.88      0.98      0.93        45
+            1       0.97      0.85      0.90        39
+ 
+     accuracy                           0.92        84
+    macro avg       0.93      0.91      0.92        84
+ weighted avg       0.92      0.92      0.92        84
+        \end{verbatim}
+
+        \item pca\_95\_cross\_val:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+[3.45060983], [-0.62162363  0.28950685 -2.90370654  0.12331251 -0.63409092 -0.97519043
+1.00627571  0.03454174  0.56370742  0.51257293 -0.81366973 -0.39355227
+0.92868017 -0.22670343 -0.99759401 -0.18929863 -0.06611486  0.10223507
+0.01560364 -0.40119397 -0.62603984  0.52434848 -0.49849413  0.07014436
+0.34974869  0.78899348  0.46697826 -0.44378656]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.73      0.73      0.73        45
+            1       0.69      0.69      0.69        39
+ 
+     accuracy                           0.71        84
+    macro avg       0.71      0.71      0.71        84
+ weighted avg       0.71      0.71      0.71        84
+        \end{verbatim}
+
+        \item Mô hình forward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+[2.39238454], [-1.22750117 -0.62956541  0.6089807  -1.64395066 -0.51419291  0.56803717
+-0.70918965 -0.59998591  0.33284319 -1.14806574  0.08929308 -0.65042687
+ 0.03445327 -0.82310801 -0.65535143 -0.65746128 -0.72873946  1.007609
+-1.03808744 -0.5079332  -0.27832686 -0.34488727  0.03775353  0.8428496
+-0.66721562 -0.18951126  0.70379423  0.3663588   0.33234731 -0.40931119
+ 0.07445726  0.33747407 -0.25340312 -0.03391451 -0.13591237]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.95      0.84      0.89        45
+            1       0.84      0.95      0.89        39
+ 
+     accuracy                           0.89        84
+    macro avg       0.90      0.90      0.89        84
+ weighted avg       0.90      0.89      0.89        84
+        \end{verbatim}
+
+        \item Mô hình backward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+ [2.41458433], [-0.74199349  0.10396841 -0.01955018 -0.8983396  -1.12335198 -0.57738353
+ 0.22101433  0.37032682  0.21883654  0.24269025 -0.03437109 -0.21284226
+-0.53473911 -0.59158795 -0.4755444  -0.33998808  0.18333806 -0.01940936
+-0.54681379 -0.50694504  0.80427292  0.15455973 -0.20220824  0.33436858
+ 0.77680769 -0.3250669   0.65579601  0.05784781 -0.05184129 -0.54799839
+-1.03537773 -1.50747816 -0.11392524 -0.91767792 -1.1399045   0.66878685
+-0.76702342]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.79      0.93      0.86        45
+            1       0.90      0.72      0.80        39
+ 
+     accuracy                           0.83        84
+    macro avg       0.85      0.83      0.83        84
+ weighted avg       0.84      0.83      0.83        84
+        \end{verbatim}
+
+        \item Mô hình forward-backward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+[1.54133717], [-0.79665398 -0.79093567 -0.41694567 -1.78343508  0.99782736 -0.62859154
+-0.42538027 -0.37410404 -0.39924138 -0.12847634  0.71990425 -0.75779597
+-0.13124511  0.03123733  0.78194827 -1.42733231 -0.01180141]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.86      0.93      0.89        45
+            1       0.91      0.82      0.86        39
+ 
+     accuracy                           0.88        84
+    macro avg       0.89      0.88      0.88        84
+ weighted avg       0.88      0.88      0.88        84
+        \end{verbatim}
+
+    \end{itemize}
+
     
+    Các mô hình được tối ưu hóa tham số theo cách 2 - tối ưu trên các siêu tham số random\_state, C, solver, regularization (l1, l2, elasticnet).
+    
+    \begin{itemize}
+        \item Mô hình full\_val:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+ [5.01008558], [-2.59900364  0.01571618  1.81045333 -0.55716291 -1.16394638  0.66186791
+ 2.61843254  1.46359887 -2.44642563 -0.3333156  -2.62535306 -2.12231965
+-0.13917623 -0.0058026   0.51171118  0.95725468  0.30940549 -0.36714966
+-0.31967372 -0.44059398  0.03623729 -0.90047965 -1.09174821 -1.16782886
+-0.05135374  0.6045713  -0.03990656 -0.51752371 -0.67940085 -1.04508811
+ 3.35146048 -0.49775674 -0.86864338 -0.47129255  0.50253014  1.71647
+ 1.67635103 -0.59356493 -0.5907877   2.51271125  0.23495319 -0.74032569
+ 0.02028504 -1.59558781 -2.78973509 -1.48118666 -1.35053224 -2.05050341
+-2.54213806  2.42511317 -1.58722598 -2.14496893 -0.72369936 -1.22740197
+ 0.55032604  0.99591841  1.33386345 -0.94688967 -1.82040189 -0.89923688]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.86      0.84      0.85        45
+            1       0.82      0.85      0.84        39
+ 
+     accuracy                           0.85        84
+    macro avg       0.84      0.85      0.84        84
+ weighted avg       0.85      0.85      0.85        84
+        \end{verbatim}
+
+        \item Mô hình pca\_95\_val:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+[5.19498513], [-0.45729092  0.56024963 -4.92634173 -0.45013653  0.00707188 -1.49471864
+3.38040786  0.62086612  1.29841779  2.07200013  0.         -2.05324691
+2.44933302 -1.86704226 -2.60761374  0.97269291 -1.34073726 -0.60540164
+1.48732851 -2.98148919  0.          2.94534102  0.06053189 -0.07000828
+2.12697912  0.38746598  0.91337252  0.46480429]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.79      0.93      0.86        45
+            1       0.90      0.72      0.80        39
+ 
+     accuracy                           0.83        84
+    macro avg       0.85      0.83      0.83        84
+ weighted avg       0.84      0.83      0.83        84
+        \end{verbatim}
+
+        \item Mô hình forward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+ [6.67213764], [[-3.47600987 -5.08774677  1.6980779  -4.20921218 -4.24128354  0.43572606
+ 0.4495362  -1.52207217  2.37911805 -7.60947653  6.61757377 -5.23115684
+ 5.9108327  -3.8349315  -2.34403821 -3.17924982 -0.84411576  9.40433202
+-4.17789876 -4.28628924 -4.92933932 -3.58999378  4.42048234  3.40788522
+-2.69082609 -0.14920358  3.43796032  1.07667761 -0.39611729 -2.22354928
+-1.27842051  1.74453164 -2.01442573 -2.04881538  1.12223682]]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+        
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.84      0.93      0.88        45
+            1       0.91      0.79      0.85        39
+ 
+     accuracy                           0.87        84
+    macro avg       0.88      0.86      0.87        84
+ weighted avg       0.87      0.87      0.87        84
+        \end{verbatim}
+
+        \item Mô hình backward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+ [19.25003428], [-13.02439673   8.19273535   7.33660189  -5.94149657 -20.84391556
+ 13.42704904  -9.33536159  15.90727114   3.82551455 -14.9162143
+  7.97352868 -19.35450675  19.04958772 -28.55099767  29.33248405
+-30.00237786  13.58912764  -6.06081875   2.08200566 -23.78281625
+ 35.08061839 -10.24983595  -7.35470944   3.50647981   9.44751969
+-15.33404367  29.22240983 -17.25522648  11.26859697 -12.11834107
+-14.16904409 -15.58062126  13.02142256 -12.63820856 -11.82468596
+  4.1082167   -8.47719232]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.95      0.80      0.87        45
+            1       0.80      0.95      0.87        39
+ 
+     accuracy                           0.87        84
+    macro avg       0.88      0.87      0.87        84
+ weighted avg       0.88      0.87      0.87        84
+        \end{verbatim}
+
+        \item Mô hình forward-backward:
+        
+        Các tham số được học:
+
+        \begin{verbatim}
+[3.46936766], [-1.14047453 -3.73884813  1.23532844 -6.57898666  2.96980407 -2.71754668
+2.78998564 -3.68056525  0.21683951 -4.85564027  7.99543419 -5.93173522
+3.21920437 -4.90080642  5.32430404 -6.51698018  3.20352399]
+        \end{verbatim}
+
+        Các chỉ số Precision, Recall, F1 score:
+
+        \begin{verbatim}
+                precision    recall  f1-score   support
+
+            0       0.87      0.89      0.88        45
+            1       0.87      0.85      0.86        39
+ 
+     accuracy                           0.87        84
+    macro avg       0.87      0.87      0.87        84
+ weighted avg       0.87      0.87      0.87        84
+        \end{verbatim}
+    \end{itemize}
+
+    Giải thích các ước lượng tìm được: Về ý nghĩa của các tham số, khi một biến $x_i$ tăng lên một đơn vị thì tỷ lệ giữa xác suất xảy ra và xác suất không xảy ra sự kiện $\dfrac{p}{1 - p}$ thay đổi $\exp(w_i)$ lần.
+    Ta nhận thấy các tham số trong các mô hình được học trên sklearn thường khá nhỏ không lớn như khi chạy trên R.
+    Lý do là vì khi chạy trên R dữ liệu chưa được chuẩn hóa, dữ liệu gốc thường nằm trong dải giá trị nhỏ (hình \ref{fig:raw_summary}) nên các tham số được học thường có xu hướng lớn để đóng góp vai trò vào bộ dự đoán.
+    Kết quả của mô hình sử dụng các biến được trích xuất từ thuật toán PCA giữ lại 95\% thông tin cho kết quả về F1 score khá tốt so với các mô hình còn lại.
+    Do thuật toán PCA đã trích xuất ra các đặc trưng độc lập, mô hình không có hiện tượng đa cộng tuyến.
 \end{loigiai}
 
 \begin{baitap}
@@ -806,6 +1139,22 @@ def compute_aic(y_true: np.ndarray, y_pred_prob: np.ndarray, p: int, sample_size
         Khi các điểm xác suất tăng dần thì tỷ lệ TPR/Sensitivity giảm dần do ở mức điểm cao hơn thì số lượng được dự báo là positive có thể giảm trong khi số lượng positive thực tế không đổi vậy nên TPR/Sensitivity có thể giảm. 
         Đồng thời tỷ lệ FPR cũng giảm do mức điểm cao hơn thì số lượng dự báo là positive giảm nên số lượng được dự báo sai FP (Failse Positive) có thể giảm vì vậy FPR giảm.
         Do đó đường cong ROC có xu hướng đồng biến giữa TPR/Sensitivity và FPR.
+
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[b]{\textwidth}
+                \includegraphics[scale=0.9]{figures/ROC_Curve_AIC_BIC_1.png}
+                \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 1}
+            \end{subfigure}
+            \vfill
+            \begin{subfigure}[b]{\linewidth}
+                \includegraphics[scale=0.9]{figures/ROC_Curve_AIC_BIC_2.png}
+                \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 2}
+            \end{subfigure}
+            \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình}
+            \label{fig:ROC_Curve_AIC_BIC}
+        \end{figure}
+
     \end{itemize}
 \end{loigiai}
 
