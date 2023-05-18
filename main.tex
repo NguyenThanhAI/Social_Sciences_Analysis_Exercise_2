@@ -193,7 +193,7 @@
         Từng nhãn liên kết với từng phần tử bao gồm chữ cái "R" nếu tín hiệu thu được hình trụ đá thô và "M" nếu tín hiệu thu được từ hình trụ kim loại.
         Các số trong nhãn theo thứ tự tăng dần góc thu được tín hiệu nhưng thông tin về góc không được đưa trực tiếp vào trong tập dữ liệu.
         \item Mô tả thống kê các thông tin thu tập được:
-        
+        Ta thấy có 111 ví dụ có nhãn "M" và 97 ví dụ có nhãn "R".
         Ta kiểm tra tính chuẩn của dữ liệu, ta giả thiết $H_0$ là dữ liệu theo phân phối chuẩn và đối thiết $H_1$ dữ liệu không theo phân phối chuẩn.
 
         Ta chọn các số $\alpha$:
@@ -308,7 +308,7 @@ chi_test = np.sum((alpha_diff - observed)**2/alpha_diff)
 chi_test, chi2.ppf(0.95, alphas.shape[0])
     \end{python}
     
-    Ta tính được $T=11.03288$ và $\chi_20^2(0.05)=33.9244$, vậy $T < \chi_20^2(0.05)$, ta chưa có cơ sở bác bỏ $H_0$ vậy dữ liệu là phân phối chuẩn nhiều chiều.
+    Ta tính được $T=11.03288$ và $\chi_{20}^2(0.05)=33.9244$, vậy $T < \chi_{20}^2(0.05)$, ta chưa có cơ sở bác bỏ $H_0$ vậy dữ liệu là phân phối chuẩn nhiều chiều.
 
     \begin{figure}[h!]
         \centering
@@ -409,7 +409,7 @@ chi_test, chi2.ppf(0.95, alphas.shape[0])
         Trong hồi quy logistic, phép biến đổi logit thường được áp dụng trên tỷ lệ giữa khả năng xảy ra trên khả năng không xảy ra được biểu diễn bằng công thức sau:
 
         \begin{equation*}
-            \log \dfrac{p}{1-p} = w_0 +  w_1 x_1 + w_2 x_2 + \dots w_n x_n = \bold{w}^T \bold{x}
+            \eta = \log \dfrac{p}{1-p} = w_0 +  w_1 x_1 + w_2 x_2 + \dots w_n x_n = \bold{w}^T \bold{x}
         \end{equation*}
 
         Trong công thức trên $p$ là biến phụ thuộc hay biến kết quả và $x$ là các biến độc lập.
@@ -634,7 +634,7 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
         \caption{Quantile residual của các mô hình}
         \label{fig:Quantile-residual}
     \end{figure}
-    Từ hình \ref{fig:Quantile-residual} ta nhận thấy các quantile residual của các mô hình đều có phân phối chuẩn nhưng hai bên đuôi hơi dài.Ta
+    Từ hình \ref{fig:Quantile-residual} ta nhận thấy các quantile residual của các mô hình đều có phân phối chuẩn nhưng hai bên đuôi hơi dài.
     Ta kiểm tra thành phần quantile residual với giá trị $\eta$ là log của hàm tỷ số giữa sự kiện xảy ra - không xảy ra:
 
     \begin{figure}[h!]
@@ -660,7 +660,7 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
         \label{fig:Quantile-fitted}
     \end{figure}
 
-    Từ hình \ref{fig:Quantile-fitted} ta thấy mô hình forward và mô hình forward-backward thể hiện khá tốt các giả định lý thuyết khi mà quantile residual ngẫu nhiên xung quanh điểm 0 và so với giá trị $\eta$ (log-odd) của mô hình.
+    Từ hình \ref{fig:Quantile-fitted} ta thấy mô hình forward và mô hình forward-backward thể hiện khá tốt các giả định lý thuyết khi mà quantile residual ngẫu nhiên xung quanh điểm 0 và so với giá trị $\eta$ (log-odd) của mô hình cho thấy các ví dụ độc lập với nhau.
     Tuy nhiên mô hình backward các giá trị lại tập trung về hai phía của $\eta$ lý do là vì các tham số tương ứng với từng biến của mô hình backward quá lớn khiến cho giá trị $\eta$ phân lớp rõ ràng trở nên rất lớn hoặc rất nhỏ.
 
     \begin{figure}[h!]
@@ -708,7 +708,7 @@ V58	1	73.797803271	170	2.848136e-06	8.654286e-18
         \item Tối ưu trên các siêu tham số random\_state, C, solver, regularization (l1, l2, elasticnet).
     \end{itemize}
 
-    Tập dữ liệu được chia thành hai phần train và test với tỷ lệ 60 \% - 40 \%.
+    Tập dữ liệu được chia thành hai phần train và test với tỷ lệ 60 \% - 40 \% theo cách giữ nguyên tỷ lệ các nhãn (stratified sampling - tỷ lệ các nhãn bằng nhau trong tập train và tập test và tập dữ liệu gốc).
     
     Các ký pháp của các mô hình là:
 
@@ -1100,8 +1100,6 @@ weighted avg       0.88      0.88      0.88        84
 \end{baitap}
 
 \begin{loigiai}
-    \begin{itemize}
-        \item Đại lượng ROC đo thông tin gì của mô hình?
         
         ROC (Receiver operating characteristic) là một đồ thị được sử dụng khá phổ biến trong validation các model phân loại nhị phân. Đường cong này được tạo ra bằng cách biểu diễn tỷ lệ dự báo true positive rate (TPR) dựa trên tỷ lệ dự báo failse positive rate (FPR) tại các ngưỡng Threshold khác nhau. 
         Trong học máy ta gọi true positive rate là độ nhạy sensitivity tức là xác xuất dự báo đúng một sự kiện là positive. Tỷ lệ false positive rate là probability of false alarm (tỷ lệ cảnh báo sai, một sự kiện là negative nhưng coi nó là positive) và tỷ lệ này tương ứng với xác xuất mắc sai lầm loại II. Như vậy ROC curve sẽ thể hiện mối quan hệ, sự đánh đổi và ý nghĩa lựa chọn một model phù hợp của độ nhạy và tỷ lệ cảnh báo sai.
@@ -1149,24 +1147,122 @@ weighted avg       0.88      0.88      0.88        84
         Đồng thời tỷ lệ FPR cũng giảm do mức điểm cao hơn thì số lượng dự báo là positive giảm nên số lượng được dự báo sai FP (Failse Positive) có thể giảm vì vậy FPR giảm.
         Do đó đường cong ROC có xu hướng đồng biến giữa TPR/Sensitivity và FPR.
 
+        Ý nghĩa của diện tích được giới hạn bởi đường cong ROC (AUC-ROC) cho biết xác suất ta lấy ngẫu nhiên được một ví dụ nhãn là 1 có xác suất đầu ra của mô hình cao hơn khi ta lấy ngẫu nhiên một ví dụ nhãn là 0.
+        Chỉ số AUC-ROC càng cao thì mô hình phân loại càng tốt.
+
+        Để vẽ đường cong ROC, ta sẽ chọn các xác suất ngưỡng từ 0 đến 1, sau đó tính các cặp (TPR/Sensitivity, FPR) tại từng điểm ngưỡng, ta thu được đường cong ROC.
+        Ta nhận thấy phân bố của các ví dụ nhãn 1 càng tách biệt với phân bố của các ví dụ nhãn 0 theo xác suất đầu ra của mô hình thì AUC-ROC càng lớn hay mô hình có khả năng phân loại càng tốt.
+        Ngược lại các phân bố của các ví dụ nhãn 1 và phân bố của các ví dụ nhãn 0 theo xác suất đầu ra của mô hình giao nhau càng nhiều thì AUC-ROC càng nhỏ hay mô hình có khả năng phân biệt giữa các ví dụ nhãn 1 và các ví dụ nhãn 0 không tốt. 
+
+        Để trực quan ta xét một vài hình ảnh dưới đây:
+
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=1.0\textwidth]{figures/ROC_Example_1.jpg}
+                \caption{Trường hợp một bộ phân loại hoàn hảo}
+                \label{fig:ROC_Example_1}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=1.0\linewidth]{figures/ROC_Example_2.jpg}
+                \caption{Trường hợp một bộ phân loại trung bình}
+                \label{fig:ROC_Example_2}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=1.0\linewidth]{figures/ROC_Example_3.jpg}
+                \caption{Trường hợp dự đoán ngẫu nhiên một tập dữ liệu các nhãn cân bằng}
+                \label{fig:ROC_Example_3}
+            \end{subfigure}
+            \caption{Ví dụ các trường hợp về đường cong ROC theo phân bố của các ví dụ theo nhãn 1 và nhãn 0}
+            \label{fig:ROC_Example}
+        \end{figure}
+
+        Hình \ref{fig:ROC_Example} cho ta ví dụ minh họa về các trường hợp giá trị AUC-ROC tương ứng với phân bố của các ví dụ theo nhãn 1 và nhãn 0 theo xác suất (trục hoành) đầu ra của mô hình phân loại.
+        
+        Hình \ref{fig:ROC_Example_1} cho ta trường hợp lý tưởng nhất.
+        Tại ngưỡng xác suất 0.5, ta thấy có TPR/Sensitivity = 1 và FPR=0, đường cong ROC nằm trên góc bên trái trên cùng tọa độ (0, 1) và AUC-ROC = 1.
+        
+        Hình \ref{fig:ROC_Example_2} là trường hợp trung bình và hay xảy ra trong thực tế.
+        Hai phân bố tương ứng với nhãn 1 và nhãn 0 chồng lên nhau.
+        Trên hình vẽ tại ngưỡng hiện tại ta nhận thấy có cả False Negative và False Positive như vậy TPR/Sensitivity < 1 và FPR > 0 vì vậy AUC-ROC sẽ nhỏ hơn 1.
+
+        Hình \ref{fig:ROC_Example_3} là trường hợp mà ta dự đoán ngẫu nhiên (trong trường hợp lực lượng nhãn 1 và nhãn 0 cân bằng).
+        Tại mỗi ngưỡng, xác suất một ví dụ được xem là nhãn 1 và nhãn 0 đều là như nhau vì vậy TPR/Sensitivity = FPR.
+        Vì vậy đường cong ROC trùng với đường thẳng $y=x$ và AUC-ROC = 0.5.
+        Đây là trường hợp mô hình không có khả năng phân loại. 
+
         \begin{figure}[h!]
             \centering
             \begin{subfigure}[b]{\textwidth}
                 \centering
-                \includegraphics[scale=0.8]{figures/ROC_Curve_AIC_BIC_1.png}
+                \includegraphics[scale=0.7]{figures/ROC_Curve_AIC_BIC_1.png}
                 \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 1}
+                \label{fig:ROC_Curve_AIC_BIC_1}
             \end{subfigure}
             \vfill
             \begin{subfigure}[b]{\linewidth}
                 \centering
-                \includegraphics[scale=0.8]{figures/ROC_Curve_AIC_BIC_2.png}
+                \includegraphics[scale=0.7]{figures/ROC_Curve_AIC_BIC_2.png}
                 \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình được tối ưu hóa tham số theo cách 2}
+                \label{fig:ROC_Curve_AIC_BIC_2}
             \end{subfigure}
             \caption{So sánh đường cong ROC, chỉ số AIC, BIC của các mô hình}
             \label{fig:ROC_Curve_AIC_BIC}
         \end{figure}
 
-    \end{itemize}
+        Từ các lập luận trên, ta đã hiểu ý nghĩa của đường cong ROC và đại lượng AUC-ROC trong việc đo lường khả năng phân loại của mô hình.
+        Mô hình có chỉ số AUC-ROC trên tập test càng lớn thì càng cho khả năng phân loại tốt.
+
+        Hình \ref{fig:ROC_Curve_AIC_BIC} cho ta so sánh về đường cong ROC của các mô hình.
+        Hình \ref{fig:ROC_Curve_AIC_BIC_1} so sánh đường cong ROC của các mô hình theo cách 1 - random\_state tối ưu của mô hình logistic (cách khởi tạo mô hình).
+        Hình \ref{fig:ROC_Curve_AIC_BIC_2} so sánh đường cong ROC của các mô hình theo cách 2 - tối ưu trên các siêu tham số random\_state, C, solver, regularization (l1, l2, elasticnet)
+
+        Ta nhận thấy mô hình forward và mô hình các biến đặc trích xuất từ thuật toán PCA giữ lại 95 \% thông tin cho kết quả AUC-ROC rất tốt.
+        Lý do là vì các mô hình này đã chọn (forward) hoặc trích xuất (PCA) ra các đặc trưng phù hợp ảnh hưởng nhiều đến kết quả đầu ra trong khi đã làm giảm độ tương quan giữa các đặc trưng này.
+\end{loigiai}
+
+\begin{baitap}
+    Hãy đưa ra mô hình logistic phù hợp nhất từ dữ liệu "Sonar". Vì sao?
+\end{baitap}
+
+\begin{loigiai}
+    Để chọn ra mô hình phù hợp nhất, ta sẽ dựa theo tiêu chí chính là đại lượng AUC-ROC đại diện cho khả năng phân loại của mô hình.
+    Tuy nhiên, tiêu chí trên không phải là tất cả.
+    Ta cũng nên so sánh thêm một vài đại lượng khác như AIC và BIC.
+
+    Công thức của AIC:
+
+    \begin{equation*}
+        AIC = - 2 \log L + 2 p
+    \end{equation*}
+
+    Công thức của BIC:
+
+    \begin{equation*}
+        BIC = -2 \log L + p\log n
+    \end{equation*}
+
+    với $p$ là số biến giải thích trong mô hình, $L$ là ước lượng hợp lý của mô hình, $n$ là số ví dụ của tập dữ liệu.
+
+    Trong mô hình logistic, ước lượng hợp lý bởi công thức:
+
+    \begin{equation*}
+        L = \prod_{i=1}^n p_i^{y_i}(1-p_i)^{1 - y_i}
+    \end{equation*}
+
+    với $p_i$ là xác suất đầu ra của mô hình với đầu vào là ví dụ thứ $i$ trong tập dữ liệu, $y_i$ là nhãn của dữ liệu thứ $i$.
+
+    Các đại lượng AIC, BIC tổng hòa khả năng giải thích của mô hình và có phạt độ phức tạp của mô hình (AIC chỉ phạt theo số biến giải thích, BIC phạt theo cả số biến giải thích và số ví dụ trong tập dữ liệu).
+    Từ kết quả trên ta thấy mô hình forward-backward được tối ưu hóa siêu tham số theo cách thứ 2 tuy có AUC-ROC chỉ khoảng 0.946 nhưng chỉ số AIC và BIC rất tốt (AIC=92.80, BIC=136.55).
+    Mô hình forward tối ưu hóa siêu tham số theo cách thứ 2 có AUC-ROC=0.972 và AIC, BIC vẫn khá tốt.
+
+    Nếu ta ưu tiên mô hình có khả năng phân loại tốt thì ta sử dụng mô hình forward nhưng nếu ta ưu tiên mô hình có khả năng giải thích dữ liệu tốt và khả năng phân loại ở mức khá ta sử dụng mô hình forward-backward.
+    Nhưng trong thực tế khoảng cách AUC-ROC = 0.03 không phải là khoảng cách lớn nên nói chung ta vẫn hoàn toàn có thể chọn mô hình forward-backward vì mô hình này có khả năng giải thích dữ liệu tốt, số biến giải thích ít.
 \end{loigiai}
 
 \newpage
